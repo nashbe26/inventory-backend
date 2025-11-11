@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 import connectDB from './config/database.js';
 
 // Import routes
+import authRoutes from './routes/auth.js';
 import categoryRoutes from './routes/categoryRoutes.js';
 import colorRoutes from './routes/colorRoutes.js';
 import sizeRoutes from './routes/sizeRoutes.js';
@@ -27,6 +28,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Routes
+app.use('/api/auth', authRoutes);
 app.use('/api/categories', categoryRoutes);
 app.use('/api/colors', colorRoutes);
 app.use('/api/sizes', sizeRoutes);

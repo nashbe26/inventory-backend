@@ -8,19 +8,20 @@ import {
   getProductBarcode,
   getProductDochette
 } from '../controllers/productController.js';
+import { protect, authorize } from '../middleware/auth.js';
 
 const router = express.Router();
 
 router.route('/')
-  .get(getProducts)
-  .post(createProduct);
+  .get(protect, getProducts)
+  .post(protect, authorize('admin', 'manager'), createProduct);
 
 router.route('/:id')
-  .get(getProduct)
-  .put(updateProduct)
-  .delete(deleteProduct);
+  .get(protect, getProduct)
+  .put(protect, authorize('admin', 'manager'), updateProduct)
+  .delete(protect, authorize('admin'), deleteProduct);
 
-router.get('/:id/barcode', getProductBarcode);
-router.get('/:id/dochette', getProductDochette);
+router.get('/:id/barcode', protect, getProductBarcode);
+router.get('/:id/dochette', protect, getProductDochette);
 
 export default router;

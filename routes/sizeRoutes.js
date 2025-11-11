@@ -6,16 +6,17 @@ import {
   updateSize,
   deleteSize
 } from '../controllers/sizeController.js';
+import { protect, authorize } from '../middleware/auth.js';
 
 const router = express.Router();
 
 router.route('/')
-  .get(getSizes)
-  .post(createSize);
+  .get(protect, getSizes)
+  .post(protect, authorize('admin', 'manager'), createSize);
 
 router.route('/:id')
-  .get(getSize)
-  .put(updateSize)
-  .delete(deleteSize);
+  .get(protect, getSize)
+  .put(protect, authorize('admin', 'manager'), updateSize)
+  .delete(protect, authorize('admin'), deleteSize);
 
 export default router;

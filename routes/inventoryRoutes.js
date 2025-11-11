@@ -4,11 +4,12 @@ import {
   getLowStock,
   getInventoryStats
 } from '../controllers/inventoryController.js';
+import { protect, authorize } from '../middleware/auth.js';
 
 const router = express.Router();
 
-router.post('/adjust', adjustInventory);
-router.get('/low-stock', getLowStock);
-router.get('/stats', getInventoryStats);
+router.post('/adjust', protect, authorize('admin', 'manager'), adjustInventory);
+router.get('/low-stock', protect, getLowStock);
+router.get('/stats', protect, getInventoryStats);
 
 export default router;

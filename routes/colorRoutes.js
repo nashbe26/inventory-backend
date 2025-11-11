@@ -6,16 +6,17 @@ import {
   updateColor,
   deleteColor
 } from '../controllers/colorController.js';
+import { protect, authorize } from '../middleware/auth.js';
 
 const router = express.Router();
 
 router.route('/')
-  .get(getColors)
-  .post(createColor);
+  .get(protect, getColors)
+  .post(protect, authorize('admin', 'manager'), createColor);
 
 router.route('/:id')
-  .get(getColor)
-  .put(updateColor)
-  .delete(deleteColor);
+  .get(protect, getColor)
+  .put(protect, authorize('admin', 'manager'), updateColor)
+  .delete(protect, authorize('admin'), deleteColor);
 
 export default router;

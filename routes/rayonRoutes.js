@@ -6,16 +6,17 @@ import {
   updateRayon,
   deleteRayon
 } from '../controllers/rayonController.js';
+import { protect, authorize } from '../middleware/auth.js';
 
 const router = express.Router();
 
 router.route('/')
-  .get(getRayons)
-  .post(createRayon);
+  .get(protect, getRayons)
+  .post(protect, authorize('admin', 'manager'), createRayon);
 
 router.route('/:id')
-  .get(getRayon)
-  .put(updateRayon)
-  .delete(deleteRayon);
+  .get(protect, getRayon)
+  .put(protect, authorize('admin', 'manager'), updateRayon)
+  .delete(protect, authorize('admin'), deleteRayon);
 
 export default router;
