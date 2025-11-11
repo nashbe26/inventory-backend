@@ -28,15 +28,15 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Routes
-app.use('/api/auth', authRoutes);
-app.use('/api/categories', categoryRoutes);
-app.use('/api/colors', colorRoutes);
-app.use('/api/sizes', sizeRoutes);
-app.use('/api/rayons', rayonRoutes);
-app.use('/api/products', productRoutes);
-app.use('/api/inventory', inventoryRoutes);
-app.use('/api/scan', scanRoutes);
-app.use('/api/bulk', bulkRoutes);
+app.use('/api-inventory/auth', authRoutes);
+app.use('/api-inventory/categories', categoryRoutes);
+app.use('/api-inventory/colors', colorRoutes);
+app.use('/api-inventory/sizes', sizeRoutes);
+app.use('/api-inventory/rayons', rayonRoutes);
+app.use('/api-inventory/products', productRoutes);
+app.use('/api-inventory/inventory', inventoryRoutes);
+app.use('/api-inventory/scan', scanRoutes);
+app.use('/api-inventory/bulk', bulkRoutes);
 
 // Root endpoint
 app.get('/', (req, res) => {
