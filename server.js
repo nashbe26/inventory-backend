@@ -13,6 +13,8 @@ import productRoutes from './routes/productRoutes.js';
 import inventoryRoutes from './routes/inventoryRoutes.js';
 import scanRoutes from './routes/scanRoutes.js';
 import bulkRoutes from './routes/bulkRoutes.js';
+import orderRoutes from './routes/orders.js';
+import expenseRoutes from './routes/expenses.js';
 
 dotenv.config();
 
@@ -37,6 +39,8 @@ app.use('/api-inventory/products', productRoutes);
 app.use('/api-inventory/inventory', inventoryRoutes);
 app.use('/api-inventory/scan', scanRoutes);
 app.use('/api-inventory/bulk', bulkRoutes);
+app.use('/api-inventory/orders', orderRoutes);
+app.use('/api-inventory/expenses', expenseRoutes);
 
 // Root endpoint
 app.get('/', (req, res) => {
